@@ -1,0 +1,9 @@
+<nb-card>
+    <nb-card-header>
+        <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="back()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+        {{"New Mini Club" | translate}}
+    </nb-card-header>
+    <nb-card-body>
+        <ngx-club-form (onSubmit)="onSubmit($event)"></ngx-club-form>
+    </nb-card-body>
+</nb-card>

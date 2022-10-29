@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-header>
+      <div class="d-flex align-items-center">
+        Menu of Year
+      </div>
+      
+    </nb-card-header>
+    <nb-card-body>
+        <nb-select (selectedChange) ="onWeekChange($event)" [selected]="selectedWeek" class="mr-4">
+            <nb-option *ngFor="let week of weekNameList" [value]="week.key">{{week.value}}</nb-option>
+        </nb-select>
+        <nb-select (selectedChange) ="onDayChange($event)" [selected]="selectedDay">
+            <nb-option *ngFor="let dayname of dayNameList" [value]="dayname">{{dayname}}</nb-option>
+        </nb-select>
+        <button nbButton style="float:right" nbTooltip="Add Food to this Menu" (click)="onAddFood()"> {{'Add Food' | translate}} </button>
+        <div class="mt-1" >
+            <div *ngFor="let food of selectedFoods;" style="position: relative;">
+                <ngx-food  [food]="food">
+                </ngx-food>
+                <div style="position:absolute; right: 0px; top: 0px;z-index:99;">
+                    <button (click)="onFoodEdit(food)" nbButton ghost  nbTooltip="Edit Food">
+                        <nb-icon icon="edit-outline" ></nb-icon>
+                    </button>
+                    <button (click)="onFoodDelete(food)" nbButton ghost  nbTooltip="Remove Food From this Menu">
+                        <nb-icon icon="close-outline" ></nb-icon>
+                    </button>
+                </div>    
+            </div>
+
+        </div>
+    </nb-card-body>
+</nb-card>

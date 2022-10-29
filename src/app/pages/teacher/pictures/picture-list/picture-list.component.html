@@ -1,0 +1,14 @@
+<nb-card>
+    <nb-card-header>
+        <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="back()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+        {{'Pictures' | translate}}
+    </nb-card-header>
+    <nb-card-body class="row">
+        <div class="item col-sm-2 mb-4" (click)="add()">
+            <div class="img-content" [ngStyle]="{'background-image':  'url(/assets/images/icon-add.png)'}"></div>
+        </div>
+        <div class="item col-sm-2 mb-4" *ngFor="let picture of pictures; let i= index" (click)="open(i)">
+            <div class="img-content" [ngStyle]="{'background-image':  'url(' + picture.image + ')'}"></div>
+        </div>
+    </nb-card-body>
+</nb-card> 

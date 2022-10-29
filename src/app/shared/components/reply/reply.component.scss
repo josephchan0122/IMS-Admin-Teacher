@@ -1,0 +1,109 @@
+:host {
+    ngx-dropzone {
+        border-width: 0 2px 2px;
+        border-radius: 0;
+        padding: .2rem .5rem .2rem 0;
+        flex-wrap: wrap;
+        align-items: baseline;
+        background: #192038;
+        cursor: pointer;
+        color: #717386;
+        border: 2px dashed #101426;
+    }
+
+    ngx-dropzone-image-preview {
+        height: 100%;
+        position: relative;
+        margin: 0 .5rem 0 0;
+        ::ng-deep {
+
+            img {
+                min-width: 100px;
+            }
+        }
+    }
+
+    ngx-dropzone-label {
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        span {
+            color: #FFF;
+            padding: 0 .3rem;
+            text-align: left;
+        }
+
+        span.label {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    ngx-file-upload-ui--progressbar-circle {
+
+        ::ng-deep {
+
+            svg {
+                opacity: .8;
+                height: 72px;
+                width: 72px;
+            }
+
+            svg circle {
+                stroke: darken(#FFF, 50%);
+                stroke-width: .5rem;
+
+                &.progress {
+                    stroke-width: .5rem;
+                    stroke: #FFF;
+                }
+            }
+
+            span {
+                font-size: .7rem;
+                color: #FFF;
+            }
+
+        }
+    }
+
+    ::ng-deep {
+
+        ngx-dropzone-remove-badge {
+            z-index: 10;
+        }
+
+        tag-input input{
+            background-color: #192038;
+            border-color: #101426;
+            color: #ffffff;
+        }
+    }
+    tag-input{
+        background-color: #192038;
+        border-color: #101426;
+        color: #ffffff;
+        border-radius: 0.25rem;
+        border-style: solid;
+        border-width: 1px;
+
+        ::ng-deep .ng2-tag-input{
+            border: none;
+        }
+    }
+    
+}
+.error-text{
+    color:red;
+}
+::ng-deep{
+    ng2-menu-item {            
+        height: 100px !important;
+    }
+}

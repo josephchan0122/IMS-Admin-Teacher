@@ -1,0 +1,14 @@
+<nb-card>
+    <nb-card-header>
+        Pictures
+    </nb-card-header>
+    <nb-card-body class="row">
+        <div class="item col-sm-2 mb-4" (click)="add()">
+            <div class="img-content" [ngStyle]="{'background-image':  'url(/assets/images/icon-add.png)'}"></div>
+        </div>
+        <div class="item col-sm-2 mb-4" *ngFor="let image of pictures; let i= index" (click)="open(i)">
+            {{image}}
+            <div class="img-content" [ngStyle]="{'background-image':  'url(' + image.url + ')'}"></div>
+        </div>
+    </nb-card-body>
+</nb-card> 

@@ -1,0 +1,10 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            {{'Select Child' | translate}}
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <ngx-child-list [data]="children" (onselect)="onSelect($event)"></ngx-child-list>
+    </nb-card-body>
+</nb-card>

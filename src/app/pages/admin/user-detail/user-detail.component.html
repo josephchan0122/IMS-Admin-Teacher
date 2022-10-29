@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-lg-6">
+        <nb-card >
+            <nb-card-header> {{user?.first_name}} {{user?.last_name}} </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
+                    <div class="form-group row justify-content-center">
+                        <div class="col-sm-4 avatar">                            
+                            <div class="content" [ngStyle]="{'background-image':  'url(' + picture + ')'}">
+                            </div>
+                            <div class="select-file">
+                                <div style="position: relative; height: 100%;">
+                                    <nb-icon icon="edit-outline"  style="color: white;">arrow-back-outline</nb-icon>
+                                    <input type="file" class="file-input" accept="image/*" (change)="changeListener($event)">    
+                                </div>
+                            </div>                            
+                        </div>                        
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="label">{{'First Name' | translate}}</label>
+                        <input nbInput type="text" placeholder="{{'First Name'| translate}}" fullWidth [status]="isInvalidControl(profileForm,'first_name')?'danger':'basic'" formControlName="first_name">
+                        <div *ngIf="isInvalidControl(profileForm,'first_name')">
+                            <span class="error-text" *ngIf="profileForm.get('first_name').errors.required">{{'required' | translate}}</span>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="label">{{'Last Name' | translate}}</label>
+                        <input nbInput type="text" placeholder="{{'Last Name'| translate}}" fullWidth [status]="isInvalidControl(profileForm,'last_name')?'danger':'basic'" formControlName="last_name">
+                        <div *ngIf="isInvalidControl(profileForm,'last_name')">
+                            <span class="error-text" *ngIf="profileForm.get('last_name').errors.required">{{'required' | translate}}</span>
+                        </div>
+                      </div>
+
+                    <div class="form-group">
+                        <label class="label">{{'Email address' | translate}}</label>
+                        <input nbInput type="email" placeholder="{{'Email'| translate}}" fullWidth [status]="isInvalidControl(profileForm,'email')?'danger':'basic'" formControlName="email">
+                        <div *ngIf="isInvalidControl(profileForm,'email')">
+                            <span class="error-text" *ngIf="profileForm.get('email').errors.required">{{'required' | translate}}</span>
+                            <span class="error-text" *ngIf="profileForm.get('email').errors.email">{{'Incorrect Email Address' | translate}}</span>
+                            <span class="error-text" *ngIf="profileForm.get('email').errors.hostError">{{errors['email'][0] | translate}}</span>
+                        </div>
+                      </div>
+
+          
+                      <div class="form-group">
+                        <label class="label">{{'User ID' | translate}}</label>
+                        <input nbInput type="text" placeholder="{{'UserID'| translate}}" [status]="isInvalidControl(profileForm,'username')?'danger':'basic'" fullWidth formControlName="username">
+                        <div *ngIf="isInvalidControl(profileForm,'username')">
+                            <span class="error-text" *ngIf="profileForm.get('username').errors.required">{{'required' | translate}}</span>
+                            <span class="error-text" *ngIf="profileForm.get('username').errors.hostError">{{errors['username'][0] | translate}}</span>
+                        </div>
+                      </div>
+                      <input nbInput type="submit" value="Update" style="float: right;">
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-lg-6">
+        <nb-card >
+            <nb-card-header>{{'Change Password' | translate}}</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">
+
+                    <div class="form-group">
+                        <label class="label">{{'New Password' | translate}}</label>
+                        <input [nbPopover]="card" nbPopoverPlacement="bottom" nbInput type="password"  fullWidth [status]="isInvalidControl(passwordForm,'pwd')?'danger':'basic'" formControlName="pwd">
+                        <div *ngIf="isInvalidControl(passwordForm,'pwd')">
+                            <span class="error-text" *ngIf="passwordForm.get('pwd').errors.required">{{'required' | translate}}</span>
+                        </div>
+                        <ng-template #card>
+                            <button nbButton ghost style="min-width:300px; text-transform: none;" (click)="setPassword(input_copy)"> 
+                                <span style="margin-right: auto;">{{genereatedPwd}} </span> <span>{{'Suggested' | translate}}</span>
+                                <input type="text" style="opacity: 0; position: absolute;" value="{{genereatedPwd}}" #input_copy>
+                            </button>                            
+                          </ng-template>
+
+                        <ng-template #templateRef>                            
+                        </ng-template>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label">{{'Confirm Password' | translate}}</label>
+                        <input nbInput type="password"  fullWidth [status]="isInvalidControl(passwordForm,'confirm_pwd')?'danger':'basic'" formControlName="confirm_pwd">
+                        <div *ngIf="isInvalidControl(passwordForm,'confirm_pwd')">
+                            <span class="error-text" *ngIf="passwordForm.get('confirm_pwd').errors.mustMatch">Passwords doesn't match</span>
+                        </div>
+                    </div>
+                    <input nbInput type="submit" value="Change Password" style="float: right;">
+                </form>
+            </nb-card-body>
+        </nb-card>
+        <nb-card >
+            <nb-card-header> 
+                Classrooms 
+                <input nbInput type="submit" value="Update" (click)="onUpdateClassroom()" style="float: right;">
+            </nb-card-header>
+            <nb-card-body>
+                <nb-checkbox class="mr-2" (checkedChange)="classroomChange($event, item)" *ngFor="let item of classNameList" [value]="user?.classNames.includes(item)">{{item|translate}}</nb-checkbox>
+            </nb-card-body>
+        </nb-card>
+
+    </div>
+</div>

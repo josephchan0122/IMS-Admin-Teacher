@@ -1,0 +1,23 @@
+<p>{{'Content' | translate}}: {{data.content}} </p>
+
+<div class="search-box mb-2">
+    <div style="display: flex; justify-content:space-between;">
+        <h6> {{'Receivers' | translate}} </h6>
+        <div>
+            <input [(ngModel)]="searchWord" type="text" nbInput placeholder="{{'Search'| translate}}" (ngModelChange)="onSearchWordChange($event)"/>
+            <button type="button" nbButton status="primary"><nb-icon class="action-icon" icon="search-outline"></nb-icon></button>
+        </div>
+      
+    </div>
+</div>
+<nb-list>
+    <nb-list-item class="f-wrap">
+        <ng-container *ngFor="let item of filteredReceivers;">
+            <div style="position: relative;" class="mr-4">
+                <nb-user style="padding-right: 80px;" [picture]="getPicture(item)" [name]="getName(item)" title="{{item.receiver.role | translate}}"></nb-user>
+                <nb-badge *ngIf="!item.is_read" text="{{'not read' | translate}}" status="control" ></nb-badge>
+                <nb-badge *ngIf="item.is_read" text="{{'confirmed' | translate}}" status="info" ></nb-badge>
+            </div>
+        </ng-container>
+    </nb-list-item>    
+</nb-list>

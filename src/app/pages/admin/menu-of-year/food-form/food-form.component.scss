@@ -1,0 +1,42 @@
+
+  
+.round-img{
+    max-width: 250px;
+    .content{
+        width: 100%;
+        position: relative;
+        padding-top: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;                
+        border-radius: 10px;
+        box-shadow:0 0 5px 0.5px rgba(255, 255, 255, 1)
+    }
+    .select-file{
+        position: absolute;
+        right: -10px;
+        top:40%;
+        width: 50px;
+        height: 50px;
+        
+        input {
+            position: absolute;
+            left: 0;
+            top:0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }    
+        nb-icon {
+            width: 100%;
+            height: 100%;
+            padding: 10px 10px;
+            border-radius: 50%;
+            background-color: #2e3e6d;          
+            cursor: pointer;
+        }
+    }
+}
+.error-text{
+    color:red;
+}

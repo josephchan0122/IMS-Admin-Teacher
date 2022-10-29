@@ -1,0 +1,35 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            {{"Marketing" | translate}}
+        </div>        
+    </nb-card-header>
+    <nb-card-body>
+        <div class="search-box mb-2">
+            <div style="display: flex; justify-content:flex-end;">
+              <input [(ngModel)]="searchWord" type="text" nbInput placeholder="{{'Search by name'| translate}}" (ngModelChange)="onSearchWordChange($event)"/>
+              <button type="button" nbButton status="primary"><nb-icon class="action-icon" icon="search-outline"></nb-icon></button>
+            </div>
+        </div>
+        <nb-list>
+            <nb-list-item *ngFor="let item of filteredMarketings" style="position: relative;">                
+                <div class="ml-3 mt-2 w-100" >                    
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="text-1">
+                            
+                            <div class="date-text">
+                                <span class="text-primary">{{item.question}}?</span>
+                            </div>
+                        </div>
+                        <div class="ml-auto" >
+                            <button nbButton ghost (click)="onDeleteClick(item)"> {{'DELETE' | translate}}</button>
+                        </div>
+                    </div>
+                    <p> {{item.content}} </p>
+                </div>
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>
+
+                

@@ -1,0 +1,23 @@
+.error-message {
+    color:red;
+}
+.addon-form-control{
+    position: relative;
+    input{
+        padding-right: 30px;
+    }
+    
+}
+.input-group-addon {
+    z-index: 150;
+    position: absolute;    
+    right: 0px;
+    top:0px;
+    width: 30px;
+    height: 100%;
+    nb-icon{
+        color: #3366ff;
+        cursor: pointer;
+        // font-size:15px;
+    }
+}

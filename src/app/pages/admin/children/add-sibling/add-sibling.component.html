@@ -1,0 +1,17 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="back()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+                {{"Add Siblings" | translate}}
+            </div>
+            
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="mb-4">
+            <ngx-child-select  [childs]="children" [title]="'Select Children'" [(ngModel)]="selectedChildren" [multi]="true" ></ngx-child-select>
+        </div>        
+        <button (click)="onSubmit()" nbButton [disabled]="selectedChildren.length == 0"> {{'Add Siblings' |translate}}</button>
+    </nb-card-body>
+</nb-card>

@@ -1,0 +1,8 @@
+<div class="d-flex">
+    <nb-user [picture]="rowData.picture" [name]="rowData.first_name + ' ' + rowData.last_name" size="large"></nb-user>
+    <div class="ml-auto">
+        <button nbTooltip="{{'Edit' | translate}}" nbTooltipStatus="primary" nbButton ghost (click)="edit()"> <nb-icon icon="edit"  style="color: white;">arrow-back-outline</nb-icon> </button>
+        <button nbTooltip="{{'Remove' | translate}}" nbTooltipStatus="primary"  nbButton ghost (click)="delete()"> <nb-icon icon="person-delete"  style="color: white;">arrow-back-outline</nb-icon> </button>  
+      </div>
+</div>
+

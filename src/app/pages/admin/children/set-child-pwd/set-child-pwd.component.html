@@ -1,0 +1,72 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="back()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+                {{"Child App Info" | translate}}
+            </div>
+            <nb-user [picture]="child?.photo" [name]="child?.first_name + ' ' + child?.last_name"></nb-user>
+            
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-lg-6">
+                <nb-card >
+                    <nb-card-header> {{'UserID' | translate}} </nb-card-header>
+                    <nb-card-body>
+                        <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+                              <div class="form-group">
+                                <label class="label">{{'Username' | translate}}</label>
+                                <input nbInput type="text" placeholder="{{'Username' | translate}}" [status]="isInvalidControl(form,'username')?'danger':'basic'" fullWidth formControlName="username">
+                                <div *ngIf="isInvalidControl(form,'username')">
+                                    <span class="error-text" *ngIf="form.get('username').errors.required">{{'required' | translate}}</span>
+                                    <span class="error-text" *ngIf="form.get('username').errors.hostError">{{errors['username'][0] | translate}}</span>
+                                </div>
+                              </div>
+                              <input nbInput type="submit" value="{{ 'Update' | translate}}" style="float: right;">
+                        </form>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-lg-6">
+                <nb-card >
+                    <nb-card-header>{{'Change Password' | translate}}</nb-card-header>
+                    <nb-card-body>
+                        <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">              
+                            <div class="form-group">
+                                <label class="label">{{'New Password' | translate}}</label>
+                                
+                                <input [nbPopover]="card" nbPopoverPlacement="bottom" nbInput type="password"  fullWidth [status]="isInvalidControl(passwordForm,'pwd')?'danger':'basic'" formControlName="pwd">
+                                <div *ngIf="isInvalidControl(passwordForm,'pwd')">
+                                    <span class="error-text" *ngIf="passwordForm.get('pwd').errors.required">{{'required' | translate}}</span>
+                                </div>
+                                <ng-template #card>
+                                    <button type="button" nbButton ghost style="min-width:300px; text-transform: none;" (click)="setPassword(input_copy)"> 
+                                        <span style="margin-right: auto;">{{genereatedPwd}} </span> <span>{{'Suggested' | translate}} </span>
+                                        <input type="text" style="opacity: 0; position: absolute;" value="{{genereatedPwd}}" #input_copy>
+                                    </button>                            
+                                  </ng-template>
+        
+                                <ng-template #templateRef>                            
+                                </ng-template>
+                            </div>
+        
+                            <div class="form-group">
+                                <label class="label">{{'Confirm Password' | translate}}</label>
+                                <input nbInput type="password"  fullWidth [status]="isInvalidControl(passwordForm,'confirm_pwd')?'danger':'basic'" formControlName="confirm_pwd">
+                                <div *ngIf="isInvalidControl(passwordForm,'confirm_pwd')">
+                                    <span class="error-text" *ngIf="passwordForm.get('confirm_pwd').errors.mustMatch">{{"Passwords doesn't match" | translate}}</span>
+                                </div>
+                            </div>
+                            <input nbInput type="submit" value="{{'Change Password' | translate}}" style="float: right;">
+                        </form>
+                    </nb-card-body>
+                </nb-card>
+                
+        
+            </div>
+
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -1,0 +1,36 @@
+<div style="cursor: pointer;">
+  <ng-container *ngIf="selectedChilds?.length>0; else unknown">
+    <ng-container *ngIf="!isMulti; else multi">
+      <nb-user [ngClass]="{'disabled': isDisabled}" [picture]="selectedChilds[0].photo" [name]="selectedChilds[0].first_name + ' ' + selectedChilds[0].last_name" size="large" (click)="open(dialog)"></nb-user>
+    </ng-container>
+    <ng-template #multi>
+      <div class="d-flex align-items-center flex-wrap">
+        <ng-container *ngFor="let child of selectedChilds">
+          <nb-user [ngClass]="{'disabled': isDisabled}" class="mr-2" [picture]="child.photo" [name]="child.first_name + ' ' + child.last_name" size="large" (click)="open(dialog)"></nb-user>
+        </ng-container>
+      </div>
+    </ng-template>  
+  </ng-container>
+  <ng-template #unknown>
+      <nb-user [ngClass]="{'disabled': isDisabled}" [picture]="unknown_picture" name="{{title | translate}}" size="large" (click)="open(dialog)"></nb-user>    
+  </ng-template>
+  <ng-template #dialog let-data let-ref="dialogRef">
+      <nb-card>
+        <nb-card-header>
+            {{title | translate}}
+            <button nbTooltip="Back"  nbButton ghost (click)="ref.close()" style="float:right"> <nb-icon icon="close-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+        </nb-card-header>
+        <nb-card-body style="min-height: 300px;">
+          <div class="search-box">
+              <div style="display: flex;">
+                <input [(ngModel)]="searchWord" type="text" nbInput fullWidth placeholder="{{'Search by name' | translate}}" (ngModelChange)="onSearchWordChange($event)"/>
+                <button type="button" nbButton status="primary"><nb-icon class="action-icon" icon="search-outline"></nb-icon></button>
+              </div>
+            </div>
+          <ng2-smart-table [settings]="settings" [source]="childs_src" (userRowSelect)="onRowSelect($event); handleClose(ref);">
+          </ng2-smart-table>
+        </nb-card-body>
+  
+      </nb-card>
+  </ng-template>  
+</div>

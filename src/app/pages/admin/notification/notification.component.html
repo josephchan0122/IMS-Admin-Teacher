@@ -1,0 +1,45 @@
+<nb-flip-card [showToggleButton]="false" [flipped]="isDetail">
+    <nb-card-front>  
+        <nb-card>
+            <nb-card-header>
+                <div class="d-flex align-items-center justify-content-between">
+                    {{"Notifications Sent" | translate}}
+                    <button nbTooltip="{{'New Notification'| translate}}"  nbButton status="info"  (click)="newNotification()"> {{'New Notification' | translate}} </button>        
+                </div>        
+            </nb-card-header>
+            <nb-card-body>
+                <div class="search-box mb-2">
+                    <div style="display: flex; justify-content:flex-end;">
+                      <input [(ngModel)]="searchWord" type="text" nbInput placeholder="{{'Search'| translate}}" (ngModelChange)="onSearchWordChange($event)"/>
+                      <button type="button" nbButton status="primary"><nb-icon class="action-icon" icon="search-outline"></nb-icon></button>
+                    </div>
+                </div>
+                <nb-list>
+                    <nb-list-item *ngFor="let item of filteredNotifications" style="position: relative; cursor: pointer;" (click)="onItemSelect(item)">
+                        <div class="w-100">
+                            <div class="row justify-content-between">
+                                <p class="text-1"> {{item.subject}} </p>
+                                <p> {{getFormatDate(item.created_at)}}  </p>
+                            </div>                        
+                            <p> {{item.content}} </p>
+                        </div>
+                        
+                    </nb-list-item>      
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-front>
+    <nb-card-back>
+        <nb-card>
+            <nb-card-header>
+                <div class="d-flex align-items-center">
+                    <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="isDetail=false"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+                    {{'Subject' | translate}}: {{ selectedNotification?.subject | titlecase  }}
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <ngx-notification-detail [data]="selectedNotification" [receivers]="selectedReceivers" *ngIf="selectedNotification"></ngx-notification-detail>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-back>
+</nb-flip-card>

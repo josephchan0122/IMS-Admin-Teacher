@@ -1,0 +1,9 @@
+<div style="position: relative; cursor: pointer; " >
+    <nb-user [title]="rowData.nameOfClass" [picture]="rowData.photo" [name]="rowData.first_name + ' ' + rowData.last_name" size="large" ></nb-user>
+    <div style="position:absolute; right: 0px; top: 0px;z-index:99;" *ngIf="this.rowData.checked">
+        <nb-icon icon="checkmark-outline" ></nb-icon>
+    </div>
+</div>
+
+
+

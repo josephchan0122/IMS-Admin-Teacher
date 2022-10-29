@@ -1,0 +1,35 @@
+<nb-card>
+    <nb-card-header>
+        {{"Message Center" | translate}}
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list>
+            <nb-list-item *ngFor="let msg of messages" (click)="goToMessageDetail(msg)">
+                <div class="row justify-content-center w-100">
+                    <div class="avatar ml-2">                            
+                        <div class="content" [ngStyle]="{'background-image':  'url(' +getSenderPhotoUrl(msg) + ')'}">
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-1">
+                            {{'From' | translate}}: <span *ngIf=isAdmin(msg.sender)> {{'Admin Center' | translate}} ({{getSenderName(msg, user) | translate}})</span>
+                            <span *ngIf=!isAdmin(msg.sender)> {{getSenderName(msg, user) |translate}}</span>
+                            {{'To' | translate}}:<span *ngIf=isAdmin(msg.receiver)> {{'Admin Center' | translate}} ({{getReceiverName(msg, user) | translate}})</span>
+                            <span *ngIf=!isAdmin(msg.receiver)> {{getReceiverName(msg,user ) | translate}}</span>
+                                
+                        </div>                        
+                        <div class="mt-2" [ngClass]="{'text-1':isRead(msg)}"> {{msg.subject}} </div>
+                        <div class="mt-2" [ngClass]="{'text-1':isRead(msg)}" style="  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">
+                            {{msg.content}}
+                        </div>
+                    </div>
+                    <div class="ml-auto">
+                        <div>
+                            {{getFormatDate(msg.created_at)}}                            
+                        </div>
+                    </div>
+                </div>
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>

@@ -1,0 +1,17 @@
+<nb-card>
+    <nb-card-header>
+      <div class="d-flex align-items-center">
+        {{'Choose Classroom' | translate}}
+      </div>      
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-3" style="height: 100px;" *ngFor="let name of nameList" (click)="selectClass(name)" [ngClass]="{'selected': name==currentClassName}">
+                <h5>{{name | translate |titlecase }}</h5>
+            </div>
+        </div>
+        <div class="row justify-content-center" *ngIf="nameList?.length == 0 && isTeacher()">
+          <h5> {{'There is no classroom for you' | translate}} !</h5>
+        </div>
+    </nb-card-body>
+</nb-card>

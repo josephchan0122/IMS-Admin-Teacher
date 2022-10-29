@@ -1,0 +1,179 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="back()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+                {{'Child' | translate}}
+            </div>
+            <div>
+                
+                <button  nbButton ghost (click)="onSetPWDClick()" *ngIf="!isTeacher()"> {{'Set Password' | translate}} </button>
+            </div>
+            
+            
+        </div>
+        
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">            
+            <div class="col-md-6">
+                <nb-card>
+                    <nb-card-header>
+                        {{'Basic Information' | translate}}
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 avatar">                            
+                                <div class="content" [ngStyle]="{'background-image':  'url(' + getPhotoOfChild() + ')'}">
+                                </div>                                                 
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'First Name' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.first_name |titlecase }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Last Name' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.last_name |titlecase }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Birth Date' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.birth}}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Gender' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.gender | titlecase }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Nationality' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.nationality | titlecase }}</span>
+                            </div>                                                        
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Address' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.address | titlecase }}</span>
+                            </div>
+                            <!-- Mother -->
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'First Name of Mother' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.firstNameOfMother | titlecase }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Last Name of Mother' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.lastNameOfMother | titlecase }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Phone of Mother' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.phoneOfMother }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Email of Mother' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.emailOfMother}}</span>
+                            </div>
+                            <!-- Father -->
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Fist Name of Father' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.firstNameOfFather | titlecase }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Last Name of Father' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.lastNameOfFather | titlecase }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Phone of Father' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.phoneOfFather }}</span>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <label class="label">{{'Email of Father' | translate}}:</label>
+                                <span class="text-info ml-2">{{child?.emailOfFather }}</span>
+                            </div>                            
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-6">
+                <nb-card>
+                    <nb-card-header>
+                        {{'Emergency Contacts' | translate}}
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="row" >
+                            <div *ngFor="let item of child?.emergenyContacts" class="emergency-item">
+                                <div>
+                                    <span class="label">{{'Name' | translate}}:</span>
+                                <span class="text-info ml-2">{{item.name | titlecase }}</span>
+                                </div>
+                                <div>
+                                    <span class="label">{{'Email' | translate}}:</span>
+                                    <span class="text-info ml-2">{{item.email}}</span>
+                                </div>
+                                <div>
+                                    <span class="label">{{'Phone Number' | translate}}:</span>
+                                    <span class="text-info ml-2">{{item.phone_number}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+                <nb-card>
+                    <nb-card-header>
+                        {{'Authorization Person' | translate}}
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="row" >
+                            <div *ngFor="let item of child?.authPersons" class="ml-4 mt-4">
+                                <nb-user [picture]="item.photo" [name]="item.first_name + ' ' + item.last_name" [title]="item.phone_number"></nb-user>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-6">
+                <nb-card>
+                    <nb-card-header>
+                        {{'Child Health Details' | translate}}
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div>
+                            <span class="label">{{'Allergies' | translate}}:</span>
+                            <span class="text-info ml-2">{{child?.allgeries | titlecase }}</span>
+                        </div>
+                        <div>
+                            <span class="label">{{'Food Restriction' | translate}}:</span>
+                            <span class="text-info ml-2">{{child?.food_restriction | titlecase }}</span>
+                        </div>
+                        <div>
+                            <span class="label">{{'Health Issue' | translate}}:</span>
+                            <span class="text-info ml-2">{{child?.health_issue | titlecase }}</span>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-6" *ngIf="isAdmin(currentUser)">
+                <!-- Siblings -->
+                <nb-card>
+                    <nb-card-header>
+                        {{'Siblings' | translate}}
+                        <button nbTooltip="Add Sibling" *ngIf="!isTeacher()"  nbButton ghost (click)="onAddSiblingClick()"> <nb-icon icon="plus-outline"  style="color: white;">plus-outline</nb-icon> </button>
+                        <button *ngIf="child?.siblings.length > 1  && !isTeacher()" nbTooltip="Remove From Sibling"  nbButton ghost (click)="onRemoveSiblingClick()"> <nb-icon icon="minus-outline"  style="color: white;">minus-outline</nb-icon> </button>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <ng-container *ngIf="child?.siblings.length == 0; else siblings">
+                            {{'Empty' | translate}}
+                        </ng-container>
+                        <ng-template #siblings>
+                            <div class="row">
+                                <div class="mr-2" *ngFor="let sibling of child?.siblings" style="cursor: pointer;" (click)="onSiblingClick(sibling)">
+                                    <nb-user [picture]="sibling.photo" [name]="sibling.first_name + ' ' + sibling.last_name "></nb-user>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </nb-card-body>
+
+                </nb-card>
+            </div>
+            <button nbButton ghost status="danger" (click)="onDelete()" *ngIf="!isTeacher()">{{'Delete' | translate}} </button>
+
+        </div>        
+    </nb-card-body>
+</nb-card>

@@ -1,0 +1,15 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            {{"Request Appointment" | translate}}
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="mb-4">
+            <ngx-child-select  [childs]="children" [title]="'Select Children'" [(ngModel)]="selectedChildren" [multi]="true" ></ngx-child-select>
+        </div>        
+        <button (click)="onSubmit()" nbButton [disabled]="selectedChildren.length == 0"> {{'Send Request' | translate}}</button>
+        
+        
+    </nb-card-body>
+</nb-card>

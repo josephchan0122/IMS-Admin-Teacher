@@ -1,0 +1,23 @@
+<div class="d-flex flex-wrap input-style align-items-center">
+    <div class="tag mr-2" *ngFor="let item of selectedData"> 
+        <div class="tag-content">
+            {{getItemName(item)}}
+            <nb-icon icon="close-outline" (click)="onRemove(item)" ></nb-icon>
+        </div>
+    </div>
+    <input #autoInput
+    nbInput    
+    type="text"
+    (input)="onSearchKeyChange()"
+    [nbAutocomplete]="auto" class="flex-grow-1 "/>
+</div>
+    <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)" >
+    
+        <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+            <nb-user size="medium"
+            [name]="getItemName(option)"
+            title="{{getItemTitle(option) | translate}}"
+            [picture]="getItemPicture(option)"></nb-user>
+        </nb-option>
+    
+    </nb-autocomplete>

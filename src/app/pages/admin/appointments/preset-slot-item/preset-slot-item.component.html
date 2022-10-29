@@ -1,0 +1,33 @@
+<nb-flip-card [showToggleButton]="false" [flipped]="isflipped">
+    <nb-card-front>
+        <nb-card>
+            <nb-card-body>
+                <button nbButton [disabled]="isConfirmed" status="primary" (click)="isflipped=!isflipped" >
+                    {{start | date:'HH:mm':undefined:'fr-FR'}}
+                    <!-- <span *ngIf="isCurrentChild" style="position: absolute; top: 0; left: 0; font-size: xx-small; color: red;">
+                        {{'Registered' | translate}}
+                    </span>
+                    <span *ngIf="isCurrentChild" style="position: absolute; bottom: 0; right: 0; font-size: xx-small; color: red;" >
+                        {{'by Selected Child' | translate}}
+                    </span> -->
+                    <span *ngIf="isCurrentChild" class="mr-1" style="position: absolute; top: 0; right: 0; font-size: smaller;  color: red;" >
+                        *
+                    </span>
+                </button>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-front>
+    <nb-card-back>
+        <nb-card >
+            <nb-card-body style="position: relative;">
+                <div class="small-text">
+                    
+                </div>
+                <button nbButton [disabled]="isConfirmed" status="success" (click)="onConfirm()"  >
+                    {{'Confirm' | translate}}
+                </button>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-back>
+</nb-flip-card>
+

@@ -1,0 +1,21 @@
+<nb-card style="max-height: calc(100vh - 50px)">
+    <nb-card-header>
+      <div class="d-flex align-items-center justify-content-between">
+        <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="close(false)"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>        
+        {{'Select Food' | translate}}
+        <button nbButton (click)="close(true)">{{'Done'| translate}}</button>
+      </div>
+      
+    </nb-card-header>
+    <nb-card-body >
+      <div class="search-box">
+        <div style="display: flex;">
+          <input [(ngModel)]="searchWord" type="text" nbInput fullWidth placeholder="{{'Search by name'| translate}}" (ngModelChange)="onSearchWordChange($event)"/>
+          <button type="button" nbButton status="primary"><nb-icon class="action-icon" icon="search-outline"></nb-icon></button>
+        </div>
+      </div>
+
+      <ng2-smart-table [settings]="settings" [source]="foods_src" (userRowSelect)="onRowSelect($event); ">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>

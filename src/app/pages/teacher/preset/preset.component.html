@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-header>
+        {{"Preset" | translate}} ({{classroom | translate}} )
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-4" *ngFor="let timerange of presetItem?.timeranges">
+                <nb-card>
+                    <nb-card-header>
+                        {{ timerange.date | date}}                        
+                    </nb-card-header>
+                    <nb-card-body>
+                        <nb-list>
+                            <nb-list-item *ngFor="let slot of slots[timerange.id]" style="position: relative;">
+                                <div>
+                                    {{ slot.start | date:'HH:mm'}}
+                                </div>
+                                <div *ngIf="slot.booked">
+                                    <nb-user [picture]="slot.child.photo" [name]="slot.child.first_name + ' ' + slot.child.last_name "></nb-user>
+                                </div>
+                                <nb-badge text="{{'Booked' | translate}}" status="danger" position="top right" *ngIf="slot.booked"></nb-badge>
+                            </nb-list-item>
+                        </nb-list>
+
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+        
+        
+    </nb-card-body>
+</nb-card>

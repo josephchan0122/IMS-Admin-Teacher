@@ -1,0 +1,69 @@
+
+      
+<nb-flip-card [showToggleButton]="false" [flipped]="isAdd">
+    <nb-card-front>  
+        <nb-card>
+            <nb-card-header>
+                <div class="d-flex align-items-center">
+                    {{'School Documents ' | translate}}
+                    <div class="ml-4">
+                        <button nbTooltip="Add Documents" nbTooltipStatus="primary" nbButton ghost (click)="isAdd=true">
+                            <nb-icon icon="file-add"  style="color: #aebcd8;"></nb-icon>
+                        </button>
+                    </div>
+                  </div>
+            </nb-card-header>
+            <nb-card-body >
+                
+                <nb-tabset fullWidth>  
+
+                    <nb-tab tabTitle="For Classrooms">
+                        <nb-card>
+                            <nb-card-body>
+                                <nb-list>
+                                    <nb-list-item class="contact" *ngFor="let d of forClassroomDocuments">
+                                        <a href="{{d.url}}" target="_blank"> {{d.name}}</a>   
+                                        <button nbTooltip="{{'Remove Documents' | translate}}" (click)="removeDocument(d)" nbTooltipStatus="primary" nbButton ghost>
+                                            <nb-icon icon="file-remove"  style="color: #aebcd8;"></nb-icon>
+                                        </button>           
+                                    </nb-list-item>  
+                                </nb-list>
+                            </nb-card-body>
+                        </nb-card>         
+                    </nb-tab>
+                
+                    <nb-tab tabTitle="For All">
+                        <nb-card>
+                            <nb-card-body>
+                                <nb-list>
+                                    <nb-list-item class="contact" *ngFor="let d of forAllDocuments">
+                                        <a href="{{d.url}}" target="_blank"> {{d.name}}</a>   
+                                        <button nbTooltip="{{'Remove Documents' | translate}}" (click)="removeDocument(d)" nbTooltipStatus="primary" nbButton ghost>
+                                            <nb-icon icon="file-remove"  style="color: #aebcd8;"></nb-icon>
+                                        </button>           
+                                    </nb-list-item>  
+                                </nb-list>
+                            </nb-card-body>
+                        </nb-card>                     
+                    </nb-tab>  
+                </nb-tabset>
+                
+            </nb-card-body>
+        </nb-card> 
+    </nb-card-front>
+    <nb-card-back>
+        <nb-card>
+            <nb-card-header>
+                <div class="d-flex align-items-center">
+                    <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="isAdd=false"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+                    {{'Add School Documents' | translate}}
+
+                </div>
+            </nb-card-header>
+            <nb-card-body >
+                <ngx-add-document (onUploaded)="onUploaded($event)"></ngx-add-document>
+            </nb-card-body>
+        </nb-card> 
+        
+    </nb-card-back>
+</nb-flip-card>

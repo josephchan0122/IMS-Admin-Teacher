@@ -1,0 +1,33 @@
+<nb-card >
+    <nb-card-header>
+        <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="back()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+        {{'Upload Pictures' | translate}}
+    </nb-card-header>
+    <nb-card-body >
+        <ngx-file-upload-ui--toolbar [storage]="storage"></ngx-file-upload-ui--toolbar>
+        <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'" >
+            <ngx-dropzone-label>{{'Drop or Browse' | translate}}</ngx-dropzone-label>
+        
+            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let upload of uploads"
+                (removed)="onRemove(upload)"
+                (change) = "onDropzoneChange($event)"
+                [file]="upload.data.raw"
+                [removable]="true">
+                <ngx-dropzone-label>
+                    <span class="state">
+                        {{upload.data.state }}
+                        State: {{upload.data.state | stateToString }}
+                    </span>
+        
+                    <!-- add progressbar -->
+                    <ngx-file-upload-ui--progressbar-circle [progress]="upload.data.progress" [parts]="12" >
+                    </ngx-file-upload-ui--progressbar-circle>
+        
+                    <span class="label">
+                        {{ upload.data.name }}
+                    </span>
+                </ngx-dropzone-label>
+            </ngx-dropzone-image-preview>
+        </ngx-dropzone>        
+    </nb-card-body>
+</nb-card> 

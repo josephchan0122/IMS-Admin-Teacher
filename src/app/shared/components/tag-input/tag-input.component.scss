@@ -1,0 +1,47 @@
+::ng-deep{
+    ::-webkit-scrollbar {
+        width: 0.3125rem;
+        height: 0.3125rem;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #101426;
+        cursor: pointer;
+        border-radius: 0.15625rem;
+    }
+    ::-webkit-scrollbar-track {
+        background: #192038;
+    }
+}
+:host{
+    .input-style{
+        background-color: #192038;
+        border-color: #101426;
+        color: #ffffff;
+        border-radius: 0.25rem;
+        border-style: solid;
+        border-width: 1px;
+    }
+    input {
+        border:none;
+        background: transparent;
+        max-width: none !important; 
+    }
+    .flex-grow-1{
+        flex-grow: 1;
+    }
+    .tag{
+        border: 1px solid #ffffff;
+        border-radius: 10px;
+        margin-left: 5px;
+        margin-top: 5px;
+        .tag-content{
+            padding-left:3px;
+            padding-bottom: 3px;
+        }
+        nb-icon{
+            cursor: pointer;
+        }
+    }
+
+    
+}

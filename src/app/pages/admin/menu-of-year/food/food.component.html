@@ -1,0 +1,14 @@
+<div class="row item">
+    <div class="round-img col-sm-3">
+        <div class="content" [ngStyle]="{'background-image':  'url(' + food.picture + ')'}">
+        </div>
+    </div>
+    <div class="col-sm-8 d-flex flex-column justify-content-center">
+        <div>
+            {{food.name}}
+        </div>
+        <div>
+            {{food.description}}
+        </div>
+    </div>
+</div>

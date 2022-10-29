@@ -1,0 +1,9 @@
+<div style="position: relative;">
+    <nb-user [picture]="getPicture()" [name]="getName()" size="large" (click)="onClick()"></nb-user>
+    <div style="position:absolute; right: 0px; top: 0px;z-index:99;" *ngIf="this.rowData.checked">
+        <nb-icon icon="checkmark-outline" ></nb-icon>
+    </div>    
+</div>
+
+
+

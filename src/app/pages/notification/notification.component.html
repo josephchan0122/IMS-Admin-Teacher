@@ -1,0 +1,33 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            {{'Notifications' | translate}}            
+        </div>
+        
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list>
+            <nb-list-item *ngFor="let notification of notifications" style="position: relative;">                
+                <div class="row justify-content-center" *ngIf="!isMessageCreate(notification)">
+                    <div class="ml-3">
+                        <div class="text-1">
+                            {{'From' | translate}}: <span >{{resolveSenderName(notification)}}</span>  
+                        </div>
+                        <div class="mt-2"> {{notification.data.subject}} </div>
+                        <div class="mt-2" style="  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">
+                            {{notification.data.content}}
+                        </div>
+                    </div>
+                    <button nbButton> {{'Read' | translate}} </button>
+                    
+                </div>
+                <div class="row justify-content-center" *ngIf="isMessageCreate(notification)">
+                    <div class="ml-3">
+                        <div class="mt-2"> {{'There are unread messages' | translate}} </div>
+                    </div>
+                </div>
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>
+

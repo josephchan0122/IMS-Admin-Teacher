@@ -1,0 +1,20 @@
+.item{
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: #151a30;
+    padding: 10px 0px;
+    
+}
+.round-img{
+    max-width: 250px;
+    min-width: 150px;
+    .content{
+        width: 100%;
+        position: relative;
+        padding-top: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;                
+        border-radius: 10px;
+        box-shadow:0 0 5px 0.5px rgba(255, 255, 255, 1)
+    }
+}

@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <nb-card >
+            <nb-card-header> 
+                {{'New Book' | translate}}
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="bookForm" (ngSubmit)="onFormSubmit()">
+                    <div class="form-group row justify-content-center">
+                        <div class="col-sm-4 avatar">                            
+                            <div class="content" [ngStyle]="{'background-image':  'url(' + picture + ')'}">
+                            </div>
+                            <div class="select-file">
+                                <div style="position: relative; height: 100%;">
+                                    <nb-icon icon="edit-outline"  style="color: white;">arrow-back-outline</nb-icon>
+                                    <input type="file" class="file-input" accept="image/*" (change)="changeListener($event)">    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label mr-4"> {{'Title' | translate}} </label>
+                        <input nbInput type="text" placeholder="{{'Title' | translate }}" [status]="isInvalidControl(bookForm,'title')?'danger':'basic'" formControlName="title">
+                        <div *ngIf="isInvalidControl(bookForm,'title')">
+                            <span class="error-text" *ngIf="bookForm.get('title').errors.required">{{'required' | translate}}</span>
+                        </div>
+                    </div>                  
+                    <div class="form-group">
+                        <label class="label mr-4"> {{'Donator' | translate}} </label>
+                        <input nbInput type="text" placeholder="{{'Donator' | translate }}" [status]="isInvalidControl(bookForm,'donator')?'danger':'basic'" formControlName="donator">
+                        <div *ngIf="isInvalidControl(bookForm,'donator')">
+                            <span class="error-text" *ngIf="bookForm.get('donator').errors.required">{{'required' | translate}}</span>
+                        </div>
+                    </div>  
+                    <div class="form-group">
+                        <label class="label"> {{'Comment' | translate}} </label>
+                        <textarea nbInput rows="5" fullWidth placeholder="{{'comment' | translate}}" formControlName="comment"></textarea>
+                    </div>
+                    <input nbInput type="submit" value="Add" style="float: right;">
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

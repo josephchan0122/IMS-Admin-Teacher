@@ -1,0 +1,84 @@
+<nb-card>
+    <nb-card-header>
+        <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="goToMessageCenter()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+        {{'Messages' | translate}}
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list style="max-height: 600px;">
+            <nb-list-item *ngFor="let msg of messages">
+                <div class="row w-100" *ngIf="msg.sender.id!=currentUser.id; else hostContent">
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-10 justify-content-end  w-100">
+                        <div class="row justify-content-end">
+                            <div class="text-1">
+                                <div class="ml-2 date-text text-right">
+                                    {{getFormatDate(msg.created_at)}}                            
+                                </div>
+                                {{'From' | translate}}: <span *ngIf=isAdmin(msg.sender)> {{'Admin Center' | translate}} ({{getSenderName(msg, currentUser) | translate}})</span>
+                            <span *ngIf=!isAdmin(msg.sender)> {{getSenderName(msg, currentUser) |translate}}</span>
+                            {{'To' | translate}}:<span *ngIf=isAdmin(msg.receiver)> {{'Admin Center' | translate}} ({{getReceiverName(msg, currentUser) | translate}})</span>
+                            <span *ngIf=!isAdmin(msg.receiver)> {{getReceiverName(msg,currentUser ) | translate}}</span>
+                                
+                            </div>   
+                            <div class="avatar ml-2">                            
+                                <div class="content" [ngStyle]="{'background-image':  'url(' +getSenderPhotoUrl(msg) + ')'}">
+                                </div>
+                            </div>                  
+                        </div>                        
+                        <div class="ml-3">                                                     
+                            <div class="mt-2 mb-2 text-right"> {{msg.content}} </div>
+                            <div class="row attached-content justify-content-end">
+                                <ng-container *ngFor="let img of msg.attachedFiles">
+                                    <img class="attached-img mr-2 mt-2" [src]="img.file">
+                                </ng-container>                            
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+                <ng-template #hostContent>
+                    <div class="row w-100" >
+                        <div class="col-10 w-100 ml-2">
+                            <div class="row">                                  
+                                <div class="avatar text-right">                            
+                                    <div class="content" [ngStyle]="{'background-image':  'url(' +getSenderPhotoUrl(msg) + ')'}">
+                                    </div>
+                                </div>       
+                                <div class="text-1 ml-2">
+                                    <div class="date-text ">
+                                        {{getFormatDate(msg.created_at)}}                            
+                                    </div>
+                                    From: <span >{{getSenderName(msg)}}</span>
+                                    To:<span >{{getReceiverName(msg)}}</span>
+                                    
+                                </div>            
+                            </div>                        
+                            <div class="ml-3">                                                     
+                                <div class="mt-2 mb-2"> {{msg.content}} </div>
+                                <div class="row attached-content">
+                                    <ng-container *ngFor="let img of msg.attachedFiles">
+                                        <a href="{{img.file}}" target="_blank"><img class="attached-img mr-2 mt-2" [src]="img.file"></a>
+                                    </ng-container>                            
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </ng-template>
+                
+            </nb-list-item>
+        </nb-list>
+        <div class="d-flex justify-content-end">
+            <button nbButton class="" *ngIf="!isReplyMode" (click)="isReplyMode=true">{{'Reply' | translate}}</button>
+        </div>
+        
+        <div style="position: relative;" *ngIf="isReplyMode">
+            <button (click)="isReplyMode=false" nbButton ghost style="position: absolute;right: 0px; top: 0px;z-index:99;">
+                <nb-icon icon="close-outline" ></nb-icon>
+            </button>
+            <ngx-reply [isReplyMode]="true" [fromContact]="currentUser" (onsend)="onSend($event)"></ngx-reply>
+        </div>
+        
+    </nb-card-body>
+</nb-card>

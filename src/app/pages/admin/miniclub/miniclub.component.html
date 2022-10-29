@@ -1,0 +1,47 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            {{"Mini Club" | translate}}
+            <button nbTooltip="{{'New Mini Club'| translate}}"  nbButton status="info"  (click)="newMiniClubClick()"> {{'New Mini Club' | translate}} </button>        
+        </div>
+        
+    </nb-card-header>
+    <nb-card-body>
+        <div class="search-box mb-2">
+            <div style="display: flex; justify-content:flex-end;">
+              <input [(ngModel)]="searchWord" type="text" nbInput placeholder="{{'Search by name'| translate}}" (ngModelChange)="onSearchWordChange($event)"/>
+              <button type="button" nbButton status="primary"><nb-icon class="action-icon" icon="search-outline"></nb-icon></button>
+            </div>
+        </div>
+        <nb-list>
+            <nb-list-item *ngFor="let clubinfo of filteredInfos" style="position: relative;">
+                
+                <div class="ml-3 mt-2 w-100"  >
+                    <div class="d-flex flex-wrap">
+                        <div class="text-1">
+                            <div class="date-text">
+                                {{'Title' | translate}}: <span >{{clubinfo.title}}</span>
+                            </div>
+                            <div class="date-text">
+                                {{'Date' | translate}}:<span >{{ clubinfo.date | date}}</span>
+                            </div>
+                        </div>
+                        <div class="ml-auto" >
+                            <button nbButton ghost (click)="onDeleteClick(clubinfo)"> {{'DELETE' | translate}}</button>
+                            <nb-badge text="Fullfiled" status="danger" position="top left" *ngIf="clubinfo.limit == clubinfo.children.length"></nb-badge>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-2 text-1"> {{clubinfo.comment}}  </div>
+                    <div class="d-flex mt-2 flex-wrap">
+                        <div class="text-1 date-text mr-4"> {{'Registered Children' | translate}} <span>{{ clubinfo.limit}} / {{clubinfo.children.length}}</span> </div>
+                        <div *ngFor="let child of clubinfo.children" class="mr-2">
+                            <nb-user [picture]="child.photo" [name]="child.first_name +' '+ child.last_name"></nb-user>
+                         </div>
+                    </div>
+                </div>
+
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>

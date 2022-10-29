@@ -1,0 +1,15 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center">
+            {{'School Documents' | translate}} 
+
+          </div>
+    </nb-card-header>
+    <nb-card-body >
+        <nb-list>
+            <nb-list-item class="contact" *ngFor="let d of documents">
+                <a href="{{d.url}}" target="_blank"> {{d.name}}</a>   
+            </nb-list-item>  
+        </nb-list>
+    </nb-card-body>
+</nb-card> 

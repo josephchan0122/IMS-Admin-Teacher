@@ -1,0 +1,44 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a
+      href="#"
+      class="sidebar-toggle"
+      matRipple
+      [matRippleUnbounded]="true"
+      [matRippleCentered]="true"
+      (click)="toggleSidebar()"
+    >
+      <nb-icon [icon]="(materialTheme$ | async) ? 'menu-outline' : 'menu-2-outline'"></nb-icon>
+    </a>
+    <a class="logo" href="#" (click)="navigateHome()">{{title | translate}}</a>
+  </div>
+</div>
+
+<div class="header-container">
+  <h6 (click)="navigateToChooseName()" style="cursor: pointer;"> {{ currentClassName | translate}} </h6>
+  <nb-actions size="small">
+    <nb-action class="sss" >
+      <div>
+        <ngx-flag-picker
+        [selectedCountryCode]="selectedCountryCode"
+        [showLabels] = "false"
+        [countryCodes]="countryCodes"
+        (changedCountryCode)="changeSelectedCountryCode($event)">
+      </ngx-flag-picker>
+      </div>
+      
+    </nb-action>
+    
+    <nb-action class="badge-notification" icon="bell-outline" (click)="onNotification()" badgePosition="top right" badgeStatus="danger" [badgeText]=" notifications.length>0 ? notifications.length: ''">
+    </nb-action>
+    <nb-action class="user-action">
+      <nb-user [nbContextMenu]="userMenu"
+               [onlyPicture]="userPictureOnly"
+               nbContextMenuTag="my-profile-tag"
+               nbContextMenuTrigger="hover"
+               [name]="user?.first_name +' '+ user?.last_name"
+               [picture]="user?.picture">
+      </nb-user>
+    </nb-action>
+  </nb-actions>
+</div>

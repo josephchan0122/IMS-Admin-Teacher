@@ -1,0 +1,24 @@
+<nb-card style="min-width: 400px;">
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">          
+          {{'Confirm or Decline' | translate}}
+          <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="close(undefined)"> <nb-icon icon="close-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>        
+        </div>
+        
+      </nb-card-header>
+    <nb-card-body>
+        <div class="row justify-content-around">
+            <nb-user [picture]="apnt.parent.picture" [name]="apnt.parent.first_name + ' ' + apnt.parent.last_name" title="{{'Parent' | translate}}"></nb-user>
+            <nb-user [picture]="apnt.child.photo" [name]="apnt.child.first_name + ' ' + apnt.child.last_name" title="{{'Desire Child' | translate}}"></nb-user>
+        </div>
+        <div class="row mt-2">
+            <textarea rows="5" fullWidth nbInput shape="round"  placeholder="{{'Write comment' | translate}}" [(ngModel)]="comment"></textarea>
+        </div>
+        
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton size="small" (click)="close(true)" class="mr-4" [tabindex]="1" status="success">{{'Confirm' | translate}}</button>
+      <button nbButton size="small" (click)="close(false)" status="danger">{{'Decline' | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+  

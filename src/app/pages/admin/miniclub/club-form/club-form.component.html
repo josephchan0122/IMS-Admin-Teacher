@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <nb-card >
+            <nb-card-header> 
+                {{'New Mini Club' | translate}}
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="clubForm" (ngSubmit)="onFormSubmit()">
+                    
+                    <div class="form-group">
+                        <label class="label mr-4"> {{'Title' | translate}} </label>
+                        <input nbInput type="text" placeholder="{{'Title' | translate }}" [status]="isInvalidControl(clubForm,'title')?'danger':'basic'" formControlName="title">
+                        <div *ngIf="isInvalidControl(clubForm,'title')">
+                            <span class="error-text" *ngIf="clubForm.get('title').errors.required">{{'required' | translate}}</span>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="label mr-4">{{'Date' | translate}}</label>
+                        <input  nbInput [owlDateTimeTrigger]="dt" [owlDateTime]="dt" [status]="isInvalidControl(clubForm,'date')?'danger':'basic'" formControlName="date">
+                        <div *ngIf="isInvalidControl(clubForm,'date')">
+                            <span class="error-text" *ngIf="clubForm.get('date').errors.required">{{'required' | translate}}</span>
+                        </div> 
+                        <owl-date-time #dt></owl-date-time>
+                      </div>
+
+                    <div class="form-group">
+                        <label class="label mr-4">{{'Price' | translate}}</label>
+                        <input nbInput type="number" placeholder="{{'Price' | translate}}" [status]="isInvalidControl(clubForm,'price')?'danger':'basic'" formControlName="price">
+                        <div *ngIf="isInvalidControl(clubForm,'price')">
+                            <span class="error-text" *ngIf="clubForm.get('price').errors.required">{{'required' | translate}}</span>
+                            <span class="error-text" *ngIf="clubForm.get('price').errors.min">{{'Input Correct Number' | translate}}</span>
+                        </div>
+                      </div>
+
+          
+                      <div class="form-group">
+                        <label class="label mr-4">{{'Limit' | translate}}</label>
+                        <input nbInput type="number" placeholder="{{'Limit' | translate}}" [status]="isInvalidControl(clubForm,'limit')?'danger':'basic'" formControlName="limit">
+                        <div *ngIf="isInvalidControl(clubForm,'limit')">
+                            <span class="error-text" *ngIf="clubForm.get('limit').errors.required">{{'required' | translate}}</span>
+                            <span class="error-text" *ngIf="clubForm.get('limit').errors.min">{{'Input Correct Number' | translate}}</span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="label"> {{'Comment' | translate}} </label>
+                        <textarea nbInput rows="5" fullWidth placeholder="{{'comment' | translate}}" formControlName="comment"></textarea>
+                      </div>
+                      <input nbInput type="submit" value="Add" style="float: right;">
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

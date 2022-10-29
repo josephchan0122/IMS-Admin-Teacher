@@ -1,0 +1,6 @@
+<div style="position: relative; min-width: 490px;">
+    <ngx-food [food]="rowData" (click)="onClick()"></ngx-food>
+    <div style="position:absolute; right: 0px; top: 0px;z-index:99;" *ngIf="this.rowData.checked">
+        <nb-icon icon="checkmark-outline" ></nb-icon>
+    </div>    
+</div>

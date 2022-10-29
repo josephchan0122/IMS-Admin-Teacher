@@ -1,0 +1,9 @@
+<nb-card>
+    <nb-card-header>
+        Parents
+    </nb-card-header>
+    <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="parent_src" (userRowSelect)="onRowSelect($event)">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card> 

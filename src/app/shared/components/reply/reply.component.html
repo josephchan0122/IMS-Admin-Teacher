@@ -1,0 +1,68 @@
+<nb-card >
+    <nb-card-body>
+        <ng-container *ngIf="!isReplyMode">
+            <div class="form-group">
+                <label class="label"> {{'From' | translate}}:</label>
+                <input nbInput type="text" fullWidth disabled [ngModel]="fromString">
+            </div>
+            <div class="form-group">
+                <label class="label"> {{'To' | translate}}:</label>              
+                <ngx-tag-input required minlength="1" [(ngModel)]="to_contacts" [usertype] = "fromContact.role" #contacts="ngModel"></ngx-tag-input>
+                
+                <div *ngIf="contacts.invalid && isSubmitted">
+                    <span class="error-text"> {{'At least One Contact is required' | translate}}. </span>
+                </div>
+    
+            </div>            
+            <div class="form-group">
+                <label class="label"> {{'Subject' | translate}}:</label>
+                <input nbInput type="text" fullWidth [(ngModel)]="subject" required #subjectControl="ngModel">
+                <div *ngIf="subjectControl.invalid && isSubmitted">
+                    <span *ngIf="subjectControl.errors.required" class="error-text"> {{'required' | translate}}. </span>
+                </div>
+            </div>
+        </ng-container>
+
+        <textarea nbInput rows="5" fullWidth placeholder="{{'Write your Content' | translate}}" [(ngModel)]="content" required #contentControl="ngModel"></textarea>
+
+        <div *ngIf="contentControl.invalid && isSubmitted">
+            <span *ngIf="contentControl.errors.required" class="error-text"> {{'required' | translate}}. </span>
+        </div>
+       
+        <div style="position: relative;" *ngIf="isAttached">
+            <button (click)="isAttached=false" nbButton ghost style="position: absolute;right: 5px; top: 5px;">
+                <nb-icon icon="close-outline" ></nb-icon>
+            </button>
+            
+            <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'" >
+                <ngx-dropzone-label>{{'Drop or Browse' | translate}}</ngx-dropzone-label>
+            
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let upload of uploads"
+                    (removed)="onRemove(upload)"
+                    [file]="upload.data.raw"
+                    [removable]="true">
+                    <ngx-dropzone-label>
+                        <span class="state">
+                            {{upload.data.state }}
+                            State: {{upload.data.state | stateToString | translate}}
+                        </span>
+            
+                        <!-- add progressbar -->
+                        <ngx-file-upload-ui--progressbar-circle [progress]="upload.data.progress" [parts]="12" >
+                        </ngx-file-upload-ui--progressbar-circle>
+            
+                        <span class="label">
+                            {{ upload.data.name }}
+                        </span>
+                    </ngx-dropzone-label>
+                </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+        </div>
+        
+        <div class="row justify-content-end">
+            <button nbTooltip="{{'AttachPicture' | translate}}"  nbButton ghost (click)="isAttached=!isAttached"> <nb-icon icon="attach-outline"  style="color: white;"></nb-icon> </button>
+            <button nbTooltip="{{'Send' | translate}}" (click)="send()" nbButton ghost > <nb-icon icon="paper-plane-outline"  style="color: white;"></nb-icon> </button>            
+        </div>
+        
+    </nb-card-body>
+</nb-card>

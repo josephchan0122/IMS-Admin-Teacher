@@ -1,0 +1,42 @@
+<nb-card>
+    <nb-card-header>
+      <div class="d-flex align-items-center">
+
+        {{title | translate}}
+      </div>
+      
+    </nb-card-header>
+    <nb-card-body *ngIf="isClosed()">
+      <h5 class="text-center"> {{'There is not available Preset ' | translate}}</h5>
+    </nb-card-body>
+    <nb-card-body *ngIf="!isClosed()">
+      
+      <div class="form-group row align-items-center">
+          <label class="label col-sm-3"> {{'Classroom' | translate}}</label>
+          <div class="col-sm-9">
+            <nb-select [(ngModel)]="selectedClassroom" (ngModelChange)="onClassroomChange($event)">
+              <nb-option *ngFor="let name of classNameList" [value]="name"> {{name |translate |titlecase}} </nb-option>
+            </nb-select>
+          </div>
+      </div>      
+      <div class="form-group row align-items-center">
+        <label class="label col-sm-3"> {{'Date' | translate}} </label>
+        <nb-select [(ngModel)] = "selectedTimeRange" (ngModelChange)="onTimerangeChange($event)">
+          <nb-option *ngFor="let timerange of dates" [value]="timerange"> {{timerange.date | date}} </nb-option>
+        </nb-select>
+
+      </div>
+      <div class="form-group row align-items-center">
+        <label class="label col-sm-3"> {{'Child' | translate}}</label>
+        <div class="col-sm-9">
+            <ngx-child-select [childs]="childs" title="{{'Select Child'| translate}}" [(ngModel)]="selectedChild" (ngModelChange)="onChildChange($event)" [disabled]="isEditmode"></ngx-child-select>
+        </div>
+    </div>
+    <div class="d-flex flex-wrap align-items-center mt-4">
+        <ng-container *ngFor="let slot of slots;">
+          <ngx-preset-slot-item [start]="slot.start" [end]="slot.end" [confirmed]="slot.booked" (confirmClick)="onConfirm($event)" [isCurrentChild]="isSameChild(slot.child, selectedChild)" ></ngx-preset-slot-item>    
+        </ng-container>            
+    </div>
+    </nb-card-body>
+</nb-card>
+

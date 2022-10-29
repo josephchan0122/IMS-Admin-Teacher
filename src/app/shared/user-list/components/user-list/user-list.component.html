@@ -1,0 +1,8 @@
+<div class="search-box mb-2">
+    <div style="display: flex; justify-content:flex-end;">
+      <input [(ngModel)]="searchWord" type="text" nbInput placeholder="{{'Search by name'| translate}}" (ngModelChange)="onSearchWordChange($event)"/>
+      <button type="button" nbButton status="primary"><nb-icon class="action-icon" icon="search-outline"></nb-icon></button>
+    </div>
+</div>
+<ng2-smart-table [settings]="settings" [source]="parent_src" (userRowSelect)="onRowSelect($event)">
+</ng2-smart-table>

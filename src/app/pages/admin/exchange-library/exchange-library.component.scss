@@ -1,0 +1,24 @@
+
+.avatar{
+    width: 50px;
+    height: 50px;
+
+    .content{
+        width: 100%;
+        position: relative;
+        padding-top: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;                
+        border-radius: 10px;
+        box-shadow:0 0 5px 0.5px rgba(255, 255, 255, 1)
+    }
+}
+nb-list-item{
+    .text-1 {
+        font-size: small;
+        color: gray;    
+    }
+    .date-text{
+        font-size: medium;
+    }
+}

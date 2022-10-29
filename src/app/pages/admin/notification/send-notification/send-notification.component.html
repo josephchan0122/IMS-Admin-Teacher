@@ -1,0 +1,48 @@
+<nb-card>
+    <nb-card-header>
+        {{"Send Notifications" | translate}}
+    </nb-card-header>
+    <nb-card-body>
+        <form class="row justify-content-center " [formGroup]="notificationForm" (ngSubmit)="onSubmit()">
+            <div class="col-sm-6">
+                <div class="form-group row align-items-center">
+                    <label class="label col-sm-3">{{'To' | translate}}</label>
+                    <div class="col-sm-9">
+                        <ngx-user-select [users]="parents" [title]="'Select Children'" formControlName="to" [multi]="true"></ngx-user-select>
+                        <div *ngIf="isInvalidControl(notificationForm,'to')">
+                            <span class="error-text" *ngIf="notificationForm.get('to').errors.minLength">{{'required' | translate}}</span>
+                        </div>  
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="label col-sm-3">{{'Subject' | translate}}</label>
+                    <div class="col-sm-9">
+                        <input nbInput type="text" fullWidth [status]="isInvalidControl(notificationForm,'subject')?'danger':'basic'" formControlName="subject">
+                        <div *ngIf="isInvalidControl(notificationForm,'subject')">
+                            <span class="error-text" *ngIf="notificationForm.get('subject').errors.required">{{'required' | translate}}</span>
+                        </div>    
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="label col-sm-3">{{'Content' | translate}}</label>
+                    <div class="col-sm-9">
+                        <textarea nbInput type="text" fullWidth rows="5" [status]="isInvalidControl(notificationForm,'content')?'danger':'basic'" formControlName="content"></textarea>                            
+                        <div *ngIf="isInvalidControl(notificationForm,'content')">
+                            <span class="error-text" *ngIf="notificationForm.get('content').errors.required">{{'required' | translate}}</span>
+                        </div>    
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3"> </div>
+                    <div class="col-sm-9" >
+                        <nb-checkbox  formControlName="is_child_broadcast">{{'BroadCast' | translate}}</nb-checkbox>
+                    </div>                    
+                </div>
+                <div class="row justify-content-end">
+                    <input nbInput type="submit" value="Save" >
+                </div>
+            </div>
+           
+        </form>
+    </nb-card-body>
+</nb-card>

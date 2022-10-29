@@ -1,0 +1,18 @@
+.avatar{
+    max-width: 150px;
+    .content{
+        width: 100%;
+        position: relative;
+        padding-top: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;                
+        border-radius: 50%;
+        box-shadow:0 0 5px 0.5px rgba(255, 255, 255, 1)
+    }
+}
+.emergency-item{
+    border: 0.0625rem solid #101426;
+    padding: 5px;
+    margin: 10px;
+    box-shadow: 0 0 5px 0.5px rgba(255, 255, 255, 1);
+}

@@ -1,0 +1,12 @@
+.row .col-sm-3{
+    h5{
+        cursor: pointer;        
+    }
+    &.selected{
+        h5{
+            border-bottom: solid;
+        }
+        
+    }
+    
+}

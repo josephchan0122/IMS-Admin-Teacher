@@ -1,0 +1,29 @@
+
+    <nb-tabset fullWidth>  
+
+      <nb-tab tabTitle="Teachers">
+        <nb-card>
+            <nb-card-body>
+              <div class="search-box mb-2">
+                <div style="display: flex; justify-content:flex-end;">
+                  <input [(ngModel)]="searchWord" type="text" nbInput placeholder="{{'Search by name'| translate}}" (ngModelChange)="onSearchWordChange($event)"/>
+                  <button type="button" nbButton status="primary"><nb-icon class="action-icon" icon="search-outline"></nb-icon></button>
+                </div>
+              </div>
+                <ng2-smart-table [settings]="settings" [source]="teacher_src">
+                </ng2-smart-table>
+            </nb-card-body>
+        </nb-card>         
+      </nb-tab>
+  
+      <!-- <nb-tab tabTitle="Parents">
+        <nb-card>
+            <nb-card-body>
+                <ng2-smart-table [settings]="settings" [source]="parent_src">
+                </ng2-smart-table>
+            </nb-card-body>
+        </nb-card> 
+        
+      </nb-tab>   -->
+    </nb-tabset>
+    

@@ -1,0 +1,20 @@
+<nb-tabset fullWidth>  
+
+    <nb-tab tabTitle="{{'Teachers' | translate}}">
+        <nb-card>
+            <nb-card-body>
+                <ngx-user-list [data]="this.teachers" (onselect)="onTeacherSelect($event)"></ngx-user-list>
+            </nb-card-body>
+        </nb-card>         
+    </nb-tab>
+
+    <nb-tab tabTitle="{{'Children' | translate}}">
+        <nb-card>
+            <nb-card-body>
+                <ngx-child-list [data]="this.children" (onselect)="onChildSelect($event)"></ngx-child-list>
+            </nb-card-body>
+        </nb-card> 
+        
+    </nb-tab>  
+    </nb-tabset>
+      

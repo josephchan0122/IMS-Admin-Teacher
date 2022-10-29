@@ -1,0 +1,125 @@
+<nb-card>
+    <nb-card-header>
+        <div class="d-flex align-items-center justify-content-between">
+            <button nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="back()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>        
+            {{'Child Daily Information' | translate}}
+            <nb-user [picture]="child?.photo" [name]="child?.first_name + ' ' + child?.last_name"></nb-user>    
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="form-group select-control" >
+                <span class="text-hint mr-2" > {{'How they ate' | translate}}? </span>
+                <nb-select [status]="isInvalidControl(formGroup,'ate')?'danger':'basic'"  formControlName="ate">
+                  <nb-option [value]="0">0</nb-option>
+                  <nb-option [value]="1">1</nb-option>
+                  <nb-option [value]="2">2</nb-option>
+                  <nb-option [value]="3">3</nb-option>
+                </nb-select>                
+            </div>
+            <div class="form-group mt-2">
+                <textarea rows="5" nbInput fullWidth shape="round"  placeholder="{{'comment' | translate}}" formControlName="ate_comment"></textarea>
+            </div>
+            <div class="form-group">
+                <span class="text-hint" > {{'The Menu of Today' | translate}}: </span>
+                
+                <nb-select class="mt-2 mr-4" (selectedChange) ="onMenuChange($event)" formControlName="week"  style="width: 150px;">
+                    <nb-option *ngFor="let week of weekNameList" [value]="week.key">{{week.value | translate}}</nb-option>
+                </nb-select>
+                <nb-select class="mt-2" (selectedChange) ="onMenuChange($event)" formControlName="day" style="width:150px">
+                    <nb-option *ngFor="let dayname of dayNameList" [value]="dayname">{{dayname | translate}}</nb-option>
+                </nb-select>
+            </div>
+            <div class="menu-items row" >
+                <ng-container *ngIf="selectedMenu; else unavilableMenu">
+                    <div class="col-sm-3 mt-2" *ngFor="let food of selectedMenu.foods" >
+                        <ngx-food [food]="food"></ngx-food>
+                    </div>                    
+                </ng-container>
+                <ng-template #unavilableMenu>
+                    <div class="col mt-2">
+                        {{'Menu is Unavailable' | translate}}
+                    </div>
+                    
+                </ng-template>
+            </div>
+            <div class="form-group mt-2">
+                <textarea rows="5" nbInput fullWidth shape="round"  placeholder="comment" formControlName="comment"></textarea>
+            </div>
+            <div class="form-group">
+                <span class="text-hint" >{{'Nap Time' | translate}}: </span>
+                <div class="d-flex flex-wrap ml-4 mt-2">
+                    <div class="mr-4">
+                        <span class="text-hint mr-4"> {{'Start' | translate}}:</span>
+                        <input class="mt-2" nbInput [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" formControlName="nap_start_time">
+                        <owl-date-time [pickerType]="'timer'" #dt1></owl-date-time>  
+                    </div>
+                    <div>
+                        <span class="text-hint mr-4"> {{'End' | translate}}:</span>
+                        <input class="mt-2"  nbInput [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" formControlName="nap_end_time">
+                        <owl-date-time [pickerType]="'timer'" #dt2></owl-date-time>  
+                    </div>
+                </div>
+                <div *ngIf="isInvalidControl(formGroup,'nap_end_time')" class="ml-4">
+                    <span class="error-text" *ngIf="formGroup.get('nap_end_time').errors.required">{{'required' | translate}}</span>
+                    <span class="error-text" *ngIf="formGroup.get('nap_end_time').errors.mustAfter">{{'End Time is not After Start Time' | translate}}</span>
+                </div>                
+            </div>
+            <div class="form-group" *ngIf="isToddler">
+                <div class="d-flex align-items-center">
+                    <div class="text-hint mr-4" >{{'Bowel Movement' | translate}}: </div>
+                    <nb-toggle style="margin-top:8px" status="basic" labelPosition="end" formControlName="is_bowel_move" (checkedChange)="IsBowelChange($event)"> {{IsBowelled}}</nb-toggle>                
+                </div>
+                <div class="ml-4">
+                    <span class="text-hint mr-4"> {{'How many a day' | translate}}?:</span>
+                    <nb-select class="mt-2" formControlName="bowel_movement_time" style="width:150px" [disabled]="IsBowelledBoolean">
+                        <nb-option [value]="1"> 1 </nb-option>
+                        <nb-option [value]="2"> 2 </nb-option>
+                        <nb-option [value]="3"> 3 </nb-option>
+                    </nb-select>
+                </div>                
+            </div>
+            <div class="form-group">
+                <div>
+                    <span class="text-hint" >{{'Record injuries' | translate}}: </span>
+                    <div style="display: inline-block;">
+                        <button type="button"  nbTooltip="{{'Back' | translate}}"  nbButton ghost (click)="addInjureForm()"> <nb-icon icon="plus-outline"  style="color: white;"></nb-icon> </button>
+                    </div>
+                </div>
+                
+                <div class="ml-4"  >
+                    <ng-container formArrayName="injureForms" *ngFor="let injureForm of injureForms.controls; index as i">
+                        <div [formGroupName] = "i">
+                            <div class="d-flex align-items-center flex-wrap mt-2" style="position: relative;">
+                                <div class="mr-4">
+                                    <span class="text-hint mr-4"> {{'Where' | translate}}:</span>
+                                    <input class="mt-2" nbInput formControlName="place">
+                                    <div *ngIf="isInvalidControl(injureForm,'place')" class="ml-1">
+                                        <span class="error-text" *ngIf="injureForm.get('place').errors.required">{{'required' | translate}}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="text-hint mr-4"> {{'When' | translate}}:</span>
+                                    <input class="mt-2"  nbInput [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" formControlName="taken_time">
+                                    <owl-date-time [pickerType]="'timer'" #dt3></owl-date-time>  
+                                    <div *ngIf="isInvalidControl(injureForm,'taken_time')" class="ml-1">
+                                        <span class="error-text" *ngIf="injureForm.get('taken_time').errors.required">{{'required' | translate}}</span>
+                                    </div>
+                                </div>
+                                <button (click)="removeInjureForm(i)" type="button" nbButton ghost style="position: absolute;right: 0px; top: -5px;z-index:99;">
+                                    <nb-icon icon="close-outline" ></nb-icon>
+                                </button>                   
+                            </div>
+                        </div>                        
+                    </ng-container>
+                    <textarea class="mt-2" rows="5" nbInput fullWidth shape="round"  placeholder="Comment for Injuries" formControlName="injureComment"></textarea>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <input nbInput type="submit" value="{{buttonText | translate}}" >
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+
+
